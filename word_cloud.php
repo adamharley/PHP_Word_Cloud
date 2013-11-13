@@ -35,13 +35,6 @@ class WordCloud {
     }
     $this->table->setMinFontSize(10);
     $this->table->setMaxFontSize(72);
-    // $this->table = new FrequencyTable($font);//, $text);
-    // $this->table->add_word('word1');
-    // $this->table->add_word('word2', 2);
-    // $this->table->add_word('word3');
-    // $this->table->add_word('word4', 4);
-    // $this->table->add_word('word5');
-    // for($i = 6; $i <= 20; $i++) $this->table->add_word('word'.$i, $i % 5);
     
     $this->image = imagecreatetruecolor($width, $height);
 	//Set the flag to save full alpha channel information (as opposed to single-color transparency) when saving PNG images
