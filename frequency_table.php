@@ -145,25 +145,13 @@ class FrequencyTable {
    * @return string The cleaned up word
    */
   private function cleanup_word($word) {
-
-    $tmp = $word;
-
     // Remove unwanted characters
     $punctuation = array('?', '!', '\'', '"');
-    foreach($punctuation as $p) {
-      $tmp = str_replace($p, '', $tmp);
-    }
+    $word = str_replace($punctuation, '', $word);
 
     // Remove trailing punctuation
-    $punctuation[] = '.';
-    $punctuation[] = ',';
-    $punctuation[] = ':';
-    foreach($punctuation as $p) {
-      if(substr($tmp, -1) == $p) {
-        $tmp = substr($tmp, 0, -1);
-      }
-    }
-    return $tmp;
+    $word = trim($word, '.,:()');
+    return $word;
   }
 
 }
