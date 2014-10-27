@@ -49,6 +49,11 @@ class WordCloud {
     return $this->image;
   }
 
+  public function get_table() {
+    return $this->table->get_table();
+  }
+
+
   public function render($palette) {
     $i = 0;
     $positions = array();
