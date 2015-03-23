@@ -1,13 +1,15 @@
 <?php
+error_reporting(0);
 
 require dirname(__FILE__).'/tagcloud.php';
 
 $ignore = file( 'ignore.txt',  FILE_IGNORE_NEW_LINES );
+$freq_threshold = 2;
 
 $text = stripslashes( $_POST['text'] );
 $text = iconv( 'UTF-8', 'ASCII//TRANSLIT', $text );
 $text = str_replace( array( "\n", "\r" ), ' ', $text );
-$text = str_replace( array( '.', ',', '(', ')', ':', '!', ';', '\'', '"' ), '', $text );
+$text = str_replace( array( '.', ',', '(', ')', ':', '!', ';', '"' ), '', $text );
 
 $arr_text = explode( ' ', $text );
 
@@ -25,7 +27,16 @@ foreach( $arr_text as $k => $word ) {
 	$new_text[$k] = $word;
 }
 
-$full_text = implode( ' ', $new_text );
+$words_counted = array_count_values( $new_text );
+$full_text = '';
+
+foreach ( $words_counted as $word => $count ) {
+	if ( $count >= $freq_threshold ) {
+		for ( $i = 1; $i <= $count; $i++ ) {
+			$full_text .= ' ' . $word;
+		}
+	}
+}
 
 $colors = array('FFA700', 'FFDF00', 'FF4F00', 'FFEE73');
 
@@ -48,6 +59,7 @@ imagedestroy($cloud->get_image());
 
 $svg_file = time() . '.svg';
 include('svg.php');
+
 ?>
 <html>
 <head>
