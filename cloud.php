@@ -4,7 +4,7 @@ error_reporting(0);
 require dirname(__FILE__).'/tagcloud.php';
 
 $ignore = file( 'ignore.txt',  FILE_IGNORE_NEW_LINES );
-$freq_threshold = 2;
+$freq_threshold = 3;
 
 $text = stripslashes( $_POST['text'] );
 $text = iconv( 'UTF-8', 'ASCII//TRANSLIT', $text );
